@@ -16,5 +16,8 @@ xcuserdata
 DerivedData
 *.xcuserstate
 
+### Facebook SDK
+FacebookSDK.framework
+
 
 #!! ERROR:  is undefined. Use list command to see defined gitignore types !!#

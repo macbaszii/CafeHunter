@@ -38,6 +38,7 @@
 		C94AE2FD1975BDB3003425A7 /* CafeHunterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeHunterTests.swift; sourceTree = "<group>"; };
 		C94AE3101975C21A003425A7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		C94AE31819770803003425A7 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		DD3AD8D219DBC2CA006FE5CA /* CafeHunter-ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CafeHunter-ObjCBridge.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				C94AE2EA1975BDB3003425A7 /* AppDelegate.swift */,
 				C94AE2EC1975BDB3003425A7 /* ViewController.swift */,
 				C94AE31819770803003425A7 /* JSON.swift */,
+				DD3AD8D219DBC2CA006FE5CA /* CafeHunter-ObjCBridge.h */,
 				C94AE2EE1975BDB3003425A7 /* Main.storyboard */,
 				C94AE2F11975BDB3003425A7 /* Images.xcassets */,
 				C94AE3101975C21A003425A7 /* FacebookSDK.framework */,
@@ -340,6 +342,7 @@
 				INFOPLIST_FILE = CafeHunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CafeHunter/CafeHunter-ObjCBridge.h";
 			};
 			name = Debug;
 		};
@@ -355,6 +358,7 @@
 				INFOPLIST_FILE = CafeHunter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CafeHunter/CafeHunter-ObjCBridge.h";
 			};
 			name = Release;
 		};

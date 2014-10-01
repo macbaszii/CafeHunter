@@ -23,9 +23,14 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
+  let searchDistance: CLLocationDistance = 1000
   
+  @IBOutlet var mapView: MKMapView!
+  @IBOutlet var loginView: FBLoginView!
+    
   private var locationManager: CLLocationManager!
+  private var lastLocation: CLLocation?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,4 +59,13 @@ extension ViewController: CLLocationManagerDelegate {
     self.checkLocationAuthorizationStatus()
   }
   
+}
+
+extension ViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!) {
+    println(error)
+    let alert = UIAlertController(title: "Error", message: "Failed to obtain location!", preferredStyle: .Alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+    self.presentViewController(alert, animated: true, completion: nil)
+  }
 }

@@ -28,7 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
+    
+    FBSettings.setDefaultAppID("279850932224996")
+    
     return true
+  }
+  
+  func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
+    let wasHandled = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+    return wasHandled
   }
 
   func applicationWillResignActive(application: UIApplication!) {
