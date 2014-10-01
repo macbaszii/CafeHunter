@@ -44,13 +44,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
     self.checkLocationAuthorizationStatus()
   }
   
+  // MARK: Private Methods
+  
   private func checkLocationAuthorizationStatus() {
     if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+      self.mapView.showsUserLocation = true
     } else {
       self.locationManager.requestWhenInUseAuthorization()
     }
   }
-
+  
+  private func centerMapOnLocation(location: CLLocation) {
+    let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, searchDistance, searchDistance)
+    self.mapView.setRegion(coordinateRegion, animated: true)
+  }
+  
+  private func fetchCafesAroundLocation(location: CLLocation) {
+    if !FBSession.activeSession().isOpen {
+      let alert = UIAlertController(title: "Error", message: "Login first!", preferredStyle: .Alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+      self.presentViewController(alert, animated: true, completion: nil)
+      
+      return
+    }
+  }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -67,5 +84,16 @@ extension ViewController: MKMapViewDelegate {
     let alert = UIAlertController(title: "Error", message: "Failed to obtain location!", preferredStyle: .Alert)
     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
     self.presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    let newLocation = userLocation.location
+    let distance = self.lastLocation?.distanceFromLocation(newLocation)
+    
+    if distance == nil || distance! > searchDistance {
+      self.lastLocation = newLocation
+      self.centerMapOnLocation(newLocation)
+      self.fetchCafesAroundLocation(newLocation)
+    }
   }
 }
