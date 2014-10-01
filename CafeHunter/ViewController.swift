@@ -32,6 +32,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
   private var locationManager: CLLocationManager!
   private var lastLocation: CLLocation?
   
+  private var cafes = [Cafe]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -66,6 +68,42 @@ class ViewController: UIViewController, MKMapViewDelegate {
       self.presentViewController(alert, animated: true, completion: nil)
       
       return
+    }
+    
+    let urlString =
+    "https://graph.facebook.com/v2.0/search/?access_token=\(FBSession.activeSession().accessTokenData.accessToken)&type=place&q=cafe&center=\(location.coordinate.latitude),\(location.coordinate.longitude)&distance=\(Int(searchDistance))"
+    
+    let url = NSURL(string: urlString)
+    println("Requesting from FB with URL: \(url)")
+    
+    let request = NSURLRequest(URL: url)
+    NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+      
+      var error: NSError?
+      let jsonObject: AnyObject! =
+      NSJSONSerialization.JSONObjectWithData(
+        data, options: NSJSONReadingOptions(0), error: &error)
+      
+      if let jsonObject = jsonObject as? [String:AnyObject] {
+        if error == nil {
+          println("Data returned from FB:\n\(jsonObject)")
+        
+          if let data = JSONValue.fromObject(jsonObject)?["data"]?.array {
+            var cafes: [Cafe] = []
+            for cafeJSON in data {
+              if let cafeJSON = cafeJSON.object {
+                if let cafe = Cafe.fromJSON(cafeJSON) {
+                  cafes.append(cafe)
+                }
+              }
+            }
+        
+            self.mapView.removeAnnotations(self.cafes)
+            self.cafes = cafes
+            self.mapView.addAnnotations(cafes)
+          }
+        }
+      }
     }
   }
 }
