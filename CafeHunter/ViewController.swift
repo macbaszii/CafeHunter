@@ -23,7 +23,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController {
   let searchDistance: CLLocationDistance = 1000
   
   @IBOutlet var mapView: MKMapView!
@@ -147,5 +147,43 @@ extension ViewController: MKMapViewDelegate {
       self.centerMapOnLocation(newLocation)
       self.fetchCafesAroundLocation(newLocation)
     }
+  }
+    
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if let annotation = annotation as? Cafe {
+      let identifier = "pin"
+      var view: MKPinAnnotationView
+      
+      if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+        dequeuedView.annotation = annotation
+        view = dequeuedView
+      } else {
+        view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        view.canShowCallout = true
+        view.calloutOffset = CGPoint(x: -5, y: 5)
+        view.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as UIView
+      }
+      
+      return view
+    }
+        
+    return nil
+  }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+      
+      if let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("CafeView") as? CafeViewController {
+        if let cafe = view.annotation as? Cafe {
+          viewController.cafe = cafe
+          viewController.delegate = self;
+          self.presentViewController(viewController, animated: true, completion: nil)
+        }
+      }
+    }
+}
+
+extension ViewController: CafeViewControllerDelegate {
+  func cafeViewControllerDidFinish(controller: CafeViewController) {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
 }

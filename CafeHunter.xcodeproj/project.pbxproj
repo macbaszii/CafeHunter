@@ -15,6 +15,7 @@
 		C94AE3111975C21A003425A7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C94AE3101975C21A003425A7 /* FacebookSDK.framework */; };
 		C94AE31919770803003425A7 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94AE31819770803003425A7 /* JSON.swift */; };
 		DDBFB63219DBFDAB0029E235 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBFB63119DBFDAB0029E235 /* Cafe.swift */; };
+		DDBFB63419DC14280029E235 /* CafeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBFB63319DC14280029E235 /* CafeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		C94AE31819770803003425A7 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		DD3AD8D219DBC2CA006FE5CA /* CafeHunter-ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CafeHunter-ObjCBridge.h"; sourceTree = "<group>"; };
 		DDBFB63119DBFDAB0029E235 /* Cafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
+		DDBFB63319DC14280029E235 /* CafeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				C94AE2EA1975BDB3003425A7 /* AppDelegate.swift */,
 				C94AE2EC1975BDB3003425A7 /* ViewController.swift */,
+				DDBFB63319DC14280029E235 /* CafeViewController.swift */,
 				C94AE31819770803003425A7 /* JSON.swift */,
 				DDBFB63119DBFDAB0029E235 /* Cafe.swift */,
 				DD3AD8D219DBC2CA006FE5CA /* CafeHunter-ObjCBridge.h */,
@@ -220,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDBFB63419DC14280029E235 /* CafeViewController.swift in Sources */,
 				DDBFB63219DBFDAB0029E235 /* Cafe.swift in Sources */,
 				C94AE2ED1975BDB3003425A7 /* ViewController.swift in Sources */,
 				C94AE2EB1975BDB3003425A7 /* AppDelegate.swift in Sources */,
